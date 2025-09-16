@@ -1,0 +1,43 @@
+body {
+  margin: 0;
+  font-family: monospace;
+}
+
+.logo {
+  width: 20px;
+}
+
+/* Para maquetar*/
+/*
+header, .header-logo, nav, li, img {
+  border: 2px solid;
+}
+*/
+
+header {
+  display: flex;
+  /*border: 2px solid;*/
+  align-items: center;
+}
+
+.header-logo {
+  /*border: 2px solid red;*/
+  width: 10%;
+  display: flex;
+  justify-content: center;
+}
+
+header nav {
+  width: 80%;
+  /*border: 2px solid;*/
+}
+
+header nav ul {
+  display: flex;
+  justify-content: space-evenly;
+  padding-left: 0;
+}
+
+header nav ul li {
+  list-style-type: none;
+}

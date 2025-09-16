@@ -1,0 +1,113 @@
+/* consola de js es una herramienta de depuracion en el navegador
+permite ejecutar comandos en JSON, ver mensajes de registros de errores yieldhacer pruebas interactivas de codigo */
+console.log("hola mundo")
+
+/*variables
+las creamos con:
+var: no se usa
+
+let: permite declarar varialbes que pueden cambiar y tienen alcance de bloques, mejorando el control sobre donde y cuadno se puede acceder a la variable
+
+const: se utiliza para declarar variables que no se deben reasignar. el valor podra ser modificado si es un objeto o array, pero la referencia NO cambia
+
+EN LAS VARIABLES QUE SEPAMOS Q NO SE VAN A CAMBIAR --> CONST
+SI VAN A CAMBIAR --> LET
+*/
+
+var nombre = "hola"; // variable VAR con alcance flobar o funncion, no tiene bloque
+
+let edad = 35; // declaracion moderna, con alcance de bloque
+
+const pi = 3.1416; // declaracion de una constante, su valor no cambia una vez asignado y no permite reasignacion
+
+console.log(nombre);
+console.log(edad);
+console.log(pi);
+
+
+/* TIPOS DE DATOS PRIMITIVOS
+
+numeros: valores numericos
+cadenas: texto encerrado en comillas simples o dobles
+booleanos: true o false
+null: valor intencionalmente vacio
+undefined: variable q fue declarada pero no tiene valor
+*/
+
+let numero = 42;
+console.log(numero);
+
+let texto= "chau";
+console.log(texto);
+
+let verdadero = true;
+console.log(verdadero);
+
+let vacio = null;
+console.log(vacio);
+
+let indefinido;
+console.log(indefinido);
+
+/* OPERADORES
+https://www.w3schools.com/js/js_operators.asp
+
+aritmeticos: usados para realizar operaciones matematicas sobre valores numericos
+de asignacion: asignan valores a las variables 
+comparacion: se usan para comparar valores y se devuelve un resultado booleano true o false
+logicos: se usan para combinar expresiones booleanas
+tipo: permite verificar el tipo de un valor 
+incremento y decremento; aumentar o disminuir valores numericos
+
+*/
+
+// aritmeticos
+let a = 10;
+let b = 3;
+console.log(a + b);
+console.log(a - b);
+console.log(a * b);
+console.log(a / b);
+console.log(a % b);
+console.log(a ** b);
+
+
+// de asignacion
+let x = 10;
+console.log(x);
+
+x += 5
+console.log(x);
+
+x -= 2;
+console.log(x);
+
+
+// comparacion
+let c = 5;
+let d = "5";
+
+console.log(c == d) //  true ya que parcea el string y compara los valores 
+console.log(c === d) // false ya que comprar el valor y tipo
+
+
+// logicos
+let e = true;
+let f = false;
+
+console.log(e && f); // false AND: AMBOS DEBEN SER TRUE PARA QUE DE RESULTADO TRUE
+console.log(e || f); // true OR: UNO DEBE SER TRUE PARA QUE DE RESULTADO TRUE
+console.log(!e); // false !DISTINTO: ES FALSE YA QUE EL VALOR ES TRUE (DISTINTO)
+
+// TIPO
+console.log(typeof 42); // devuelve el tipo de dato de una variable
+console.log(typeof "holis")
+console.log([] instanceof Array); // verifica si un objeto es instancia de una clase
+
+//
+let g = 10;
+console.log(g);
+g++;
+console.log(g);
+g--;
+console.log(g);

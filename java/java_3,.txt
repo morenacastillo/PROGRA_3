@@ -1,0 +1,160 @@
+/*
+SCOPE (ambito)
+se refiere al contexto enel cual las variables y las funciones son accesibles y pueden ser referenciadas
+
+GLOBAL SCOPE o ambito global
+las variables dec
+*/
+var globalVar = "Soy global";
+
+function mostrarGlobl(){
+    console.log(globalVar);
+}
+
+mostrarGlobl();
+console.log(globalVar);
+
+
+// ejemplo function scope
+
+function mostrarLocal(){
+    var localVar = "soy local";
+    console.log(localVar);
+}
+
+mostrarLocal();
+
+
+//ejemplo block scope
+
+if(true){
+    let bloqueLet = "soy una let de bloque";
+    console.log(bloqueLet);
+}
+
+// console.log(bloqueLet);
+
+/*
+scope chain o cadena de ambito
+cuando intentamos acceder a una variable, js busca en la cadena de ambito comenzando desde el ambit o mas interno hasta el mas externo hasta entrar una variable o llegar al ambito global
+*/
+
+var soyGlobal = "soy una var global";
+function externa(){
+    var soyExterna = "soy una var externa";
+    function interna(){
+        var soyInterna = "soy una var externa";
+        console.log(soyGlobal);
+        console.log(soyExterna);
+        console.log(soyInterna);
+    }
+
+    interna();
+    console.log(soyInterna);
+}
+
+
+/*
+function scope vs block scope
+
+function scope: las varibales declarads con var, tienen ambito de fuincion. Esto significa que si se declaran dentro de una funcion, no son accesibles fuera de esa funcion pero no estan limitadas por bloques
+
+block scope: las variables declaradas con let y const estan limitadas por el bloque en que se declaran
+
+ejemplo function scope:
+*/
+
+function scopeFunction(){
+    if (true){
+        var functionVar = "soy una funcion";
+    }
+    console.log(functionVar);
+}
+
+scopeFunction();
+
+// ejemplo block scope
+function scopeBlock() {
+    if (true) {
+        let bloqueLet = "soy un let de bloque";
+        const bloqueConst = "soy una const de bloque";
+    }
+    console.log(bloqueLet);
+    console.log(bloqueConst);
+}
+
+
+
+/*
+Hosting o elevacion
+las declaraciones de variables y funciones en js se mueven hacia arriba de su contexto de ejecucion (scope)
+
+-solo las declaraciones son elevadas, no las incializaciones
+-var: las variables se elevan y se inicializan con un undefined
+
+let y const: las variables se elevan pero no se incializan por lo que veremos un error si se intenta acceder antes de su declaracion
+*/
+
+console.log(elevadaVar);
+var elevadaVar = "soy elevada";
+console.log(elevadaVar);
+
+console.log(elevadaLet);
+let elevadaLet = "soy una let elevada";
+console.log(elevadaLet);
+
+
+/*
+funcion
+
+es un bloque de codigo reutilizable que podremos ejecutar cuando lo llamamos por su nombre 
+
+usaremos funciones pq permiten organizar el codigo, permiten la reutilizacion y mejoran la ligibilidad y mantenimiento
+
+funcion declarada: la mas comun en js, usando la palabra reservada function
+
+function nombreFuncion(){
+    // codigo a ejecutar cunado se llame o invoque la funcion
+}
+
+*/
+//funciones sin parametros
+function sumaDosYCinco (){
+    let resultado = 2 + 5
+    console.log(resultado)
+}
+//function con parametros: podemos deficnir varialbes e las funciones q acepten valores cuando se las llama
+
+function sumar(a, b) {
+    let resultado = a + b;
+    console.log(resultado);
+}
+
+sumar(5, 3); // los argumentos son los valoreas que le pasamos a la funcion cuando la llamamos
+
+//funciones que devuelven un valor usando la palabra clave return
+
+function multiplicar(a, b) {
+    return a * b;// el codigo luego del return (lo de abajo) no se va a ejecutar
+    console.log("aaaa");
+}
+console.log(multiplicar(2, 2));
+
+//valores predenterminados en los parametros
+function saludar(nombre = "maestro"){
+    console.log(nombre);
+}
+
+saludar()
+
+// funciones fleca
+
+const saludarFlecha = () => {
+    console.log("Hola mundo")
+}
+
+saludarFlecha();
+
+const saludarFlechaNombre = nombre => {
+    console.log(`Que onda ${nombre}`)
+}

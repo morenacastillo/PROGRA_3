@@ -1,0 +1,92 @@
+body {
+    margin: 0;
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+}
+
+header {
+    width: 90%;
+    margin: 0 auto;
+    border-bottom: 0.5px solid rgb(230, 230, 230);
+}
+
+header, header ul {
+    display: flex;
+}
+
+header ul {
+    justify-content: space-between;
+}
+
+a {
+    text-decoration: none;
+    color: inherit;
+}
+#header-nav {
+    width: 40%;
+}
+
+#header-nav ul {
+    padding-left: 0px;
+
+}
+
+#header-nav li {
+    list-style-type: none;
+}
+
+.texto-azul {
+    color: hsl(211, 83%, 30%);
+}
+
+#header-logo {
+    width: 60%;
+}
+
+#seccion-principal{
+    width: 100%;
+    text-align: center;
+    align-items: center;
+    
+}
+
+#titulo-principal {
+    width: 100%;
+    text-align: center;
+    align-items: center;
+    font-size: 80px;
+    font-family:Verdana, Geneva, Tahoma, sans-serif
+}
+#subtitulo-disponibilidad {
+    text-align: center;
+    border: 0.1px solid rgb(228, 228, 228);
+    border-radius: 15px;
+    padding: 5px;
+    box-shadow: 2px 2px 4px #00000014;
+}
+#test{
+    display: flex;
+    justify-content: center;
+    width: 100%;
+    
+}
+
+.parrafo-principal {
+width: 100%;
+text-align: center;
+font-size: 20px;
+}
+
+
+.seccion-contacto {
+    display: flex;
+    justify-content: center;
+    padding: 10px 25px 10px 25px;
+    margin: 25px ;
+}
+
+.boton-cv{
+    border: 2px solid hsl(211, 79%, 54%);
+    color: hsl(211, 79%, 54%);
+    border-radius: 5px;
+    padding: 10px 25px 10px 25px;
+}

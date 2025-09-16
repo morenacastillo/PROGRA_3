@@ -1,0 +1,148 @@
+@import url('https://fonts.googleapis.com/css2?family=Montserrat:wght@400;700&display=swap');
+
+
+main{
+    background-color: rgb(19, 53, 90);
+    display: flex;
+    margin: 0;
+    font-family: 'Montserrat', sans-serif;
+}
+
+aside{
+    width: 40%;
+    color: white;
+
+    img {
+        width: 150px;
+        display: block;
+        margin: 20px auto 0 ;
+        border: 3px solid #ffffff;
+        border-radius: 5px;
+
+        }
+
+    h4{
+        display: flex;
+        width: 40%;  
+        padding-left: 5%;
+    }
+    hr{
+        display: relative;
+        width: 30%;
+        margin: 0 0 0px 15px;
+        position: relative;
+        top: -15px;
+    }
+
+    li{
+        font-size: 12px;
+    }
+    ul{
+        position: relative;
+        top: -15px;
+    }
+
+    /* ARREGLAR ITEM DE IMAGEN 
+
+    .lista-contacto {
+        list-style: none; 
+        padding: 0;
+        margin: 10px 20px;
+    }
+
+    .lista-contacto li {
+        margin: 10px 0;             
+        padding-left: 25px;          
+        height: 24px;                
+        line-height: 24px;           
+        background-repeat: no-repeat;
+        background-position: left center;
+        background-size: 16px 16px; 
+    }
+    
+
+    #mail{
+        background-image: url('img/mail.jpg');
+        background-size: 14px 14px;
+        background-repeat: no-repeat;
+        height: 14px;
+    }
+     */
+
+
+
+}
+
+
+section{
+    background-color: white;
+    width: 60%;
+    
+
+    h1{ 
+        width: 100%;
+        text-align: center;
+        align-items: center;
+    }
+
+    hr{
+        height: 1.5px;
+        background-color: black;
+        display: flex;
+        width: 30%;
+
+    }
+    
+    h3{
+        width: 100%;
+        padding-top: -30px;
+        text-align: center;
+        align-items: center;
+        color: grey
+    }
+
+    h4{
+        color: rgb(19, 53, 90);
+        padding-left: 15px;
+    }
+
+    h5{
+        margin-top: -15px;
+        display: flex;
+        justify-content: space-between;
+        padding-left: 15px;
+    }
+
+    p{
+        position: relative;
+        top: -15px;
+        font-size: 14px;
+        padding-left: 15px;
+
+    }
+
+    span{
+        color: rgb(19, 53, 90);
+        font-size: 12px;
+        padding-right: 15px;
+    }
+
+    ul{
+        margin-left: 5px;
+        margin-top: -15px;
+        font-size: 13px;
+    }
+
+    #fecha{
+        display: flex;
+        justify-content: space-between;
+    }
+
+    #subtitulos{
+        width: 20%;
+        margin: 15px;
+        position: relative;
+        top: -15px;
+        
+    }
+}

@@ -1,0 +1,195 @@
+//js 4
+
+//==ARRAYS y OBJETOS==========================
+/*
+en js los arrays y objetos son estructuras de datos fundamentales
+
+ARRAYS: se utilizan para almacenar una lista ordenada de elementos.
+    -cada elemento de nuestro array tiene una posicion o indice
+    -pueden contener cualquier tipo de dato
+    -los elementos no tienen q ser necesariamente del mismo tipo
+
+    acceso a datos: accedemos al array por su indice (array[0])
+    uso principal: como una lista ordenada de elementos
+    metodos: en array contamos con push(), pop(), map()
+    iteracion: forEach(), map(), etc
+                for... in, Object.keys(), Object.Values()
+
+
+OBJETOS: son ideales para almacenar o agrupar datos con propiedades clave-valor
+    -son colecciones con pares clave-valor
+    -son candenas que identifican a cada valor, permite un acceso rapido y estrucurado de datos
+    -son utiles cuando representamos una entidad con multiples propiedades
+    accedemos a las propiedades de un obj a traves de la notacion de punto(objeto.propiedad) o la notacion de corchete (objeto["propiedad"])
+
+    acceso a datos: accedemos al objeto por su clave (objeto.clave // objeto["clave"])
+    uso principal: coleccion de pares clave-valor
+    metodos: metodos personalizados y funciones
+    iteracion: forEach(), map(), etc
+                for... in, Object.keys(), Object.Values()
+*/
+
+//array
+let frutas = ["manzana", "banana", "pera"];
+console.log(frutas[0]);
+
+// ==== METODOS DE ARRAYS ===
+
+//length: devuelve la longitud de un array
+for (let i = 0; i < frutas.length; i++){
+    console.log(frutas[i]);
+}
+
+console.log([1, 2, 3].length);
+console.log(frutas.length);
+
+//push: agrega un elemento al final del array
+frutas.push("pomelo", "naranja");
+console.log(frutas);
+
+//pop: elimina el ultimo elemento y lo devuelve
+console.log(frutas.pop());
+
+//unshift: agrega un elemento al inicio
+console.log(frutas.unshift("sandia"));
+
+//shift: elimina el primer elemento y lo devuelve
+console.log(frutas.shift());
+
+//concat: concatena arrays
+let ingredientes =["avena, semillas, maca"]
+console.log(frutas.concat(ingredientes));
+console.log([1, 2].concat(3, 4));
+
+//join: une los elementos en un string
+console.log([1, 2, 3].join(".")); //1.2.3
+
+//slice: extrae una copia parcial del array
+console.log([1, 2, 3, 4].slice(1, 3));
+
+//splice: modifica el array in situ, puedo borrar y agregar
+const arr = [1, 2, 3]
+arr.splice(2, 0, "a", "b");
+console.log(arr);
+
+const verduras = ["tomate", "lechuga", "apio"];
+verduras.splice(1, 1, "rucula"); //primer argumento determina la posicion a modificar/eliminar, el 1 significa eliminar la posicion 1 y introduce rucula; el 0 significa introducir despues del indice 1
+console.log(verduras);
+
+//indexOf: devuielve la primera POSICION del elemento
+console.log([1, 2, 3].indexOf(2)); //devuelve 1 ya que es la ubicacion del elemento 2
+console.log([1, 2, 3].indexOf(5)); //si no se encuentra devuelve -1
+
+//lastIndexOf: devuelve la ultima posicion del elemento
+console.log([1, 2, 3, 1, 2, 3].lastIndexOf(3)); // devuelve 5 ya que es la ultima posicion donde aparece el 3
+
+//includes: devuelve true si el elemento existe
+console.log([1, 2, 3].includes(2)); //true
+console.log([1, 2, 3].includes(4)); //false
+
+
+
+//objeto
+let estudiante = {
+    nombre: "Morena",
+    edad: 32,
+    ciudad: "Buenos Aires",
+    saludar : function(){
+        return `hola me llamo ${this.nombre}, soy estudiante de ${this.ciudad}`
+    }
+}
+console.log(estudiante);
+
+//notacion de punto
+console.log(estudiante.nombre, estudiante.edad)
+
+//notacion de corchetes
+console.log(estudiante["nombre"]);
+
+//funcion
+console.log(estudiante.saludar());
+
+//agregamos una propiedad
+estudiante.estilo = "cuarteto";
+
+//eliminamos una propiedad
+delete estudiante.edad;
+
+/*  ==========================
+        METODOS DE STRINGS
+    ==========================
+*/
+
+let saludo = "hola desde la 334"; // se trata como un array de caracteres
+for(let i = 0; i < saludo.length; i++){
+    console.log(saludo[i]);
+}
+//length: devuelve la longitud del string
+console.log("hola mundo".length);
+
+//charAt(index): devuelve el caracter en la posicion especificada
+console.log("hola".charAt(3)) // a
+console.log("hola".charAt(0)) // h
+
+//concat: concatenar (unir) strings
+console.log("hola".concat(" mundo"));
+let saludo2 = "aaaa"
+console.log(saludo.concat(" ", saludo2)); //hola mundo aaaa
+
+// includes: devuielve true si la subcadena si se encuentra en el string
+console.log("javascript".includes("script")); //true
+console.log("javascript".includes("aaa")); //false
+
+//startsWith: comprueba si el string comienza con la subcadena
+console.log("hola mundo".startsWith("hola")); //true
+
+//endsWith: comprueba si el string termina con la subcadena
+console.log("hola mundo".endsWith("mundo")); //true
+
+//indexOf: devuelve el indice de la primera aparicion de un substring
+console.log("banana".indexOf("a"));
+
+//lastIndexOf: devuelve el indice de la ultima aparicion de un substring
+console.log("banana".lastIndexOf("a"));
+
+//replace: reemplazar una parte del string
+console.log("hola mundo".replace("mundo", "division 334")); //hola division 334
+
+//replaceAll: reemplazar todas las apariciones
+console.log("1, 2, 3".replaceAll(",", ":")); //1: 2: 3
+
+//toLowerCase: convierte a minusculas
+console.log("AAAAAAAA".toLowerCase());
+
+//toUpperCase: convierte a mayusculas
+console.log("aaaaaaa".toUpperCase());
+
+// trim: elimina espacios en blanco al principio y al final
+console.log("   hola    ".trim());
+
+//trimStart o trimLeft: elimina espacios al inicio
+//trimEnd o trimRight: elimina espacios al final
+
+//slice: extrae parte del string
+console.log("javascript".slice(0, 4)); // java
+console.log("javascript".slice(-1)); //t - trae el ultimo elemento 
+
+//substring: extra parte del string, parecido a slice, pero no acepta negativos
+console.log("javascript".substring(4, 10))
+
+//split: divide el string en un array
+console.log("rojo, verde, azul".split(", ")); // devuelve en consola: (3) ['rojo', 'verde', 'azul']
+console.log("hola".split("")); //devuelve en consola: (4) ['h', 'o', 'l', 'a']
+
+//repeat: repite el string
+console.log("ji".repeat(3));
+
+//match(regex): devuelve coincidencias con una expresion regular
+console.log("abc123".match(/\d+/g));  //123
+
+
+//
+
+
+
+
