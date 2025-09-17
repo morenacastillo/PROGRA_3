@@ -156,4 +156,186 @@ numeros2.forEach(num => dobles.push(num * 2));
 console.log(dobles);
 
 
-// TO DO, probar el refresh de la cache con localStorage y sessionStorage
+// actualizar propiedades
+const estudiantes = [
+    {nombre: "alex", nota: 9},
+    {nombre: "alexa", nota: 8},
+    {nombre: "jhonny", nota: 6},
+    {nombre: "ernesto", nota: 3}
+]
+estudiantes.forEach(estudiante =>{
+    estudiante.aprobado = estudiante.nota >= 4;
+})
+console.log(estudiantes);
+console.table(estudiantes);
+//map, filtier reduce, find, findindex, for...of
+
+//map
+//crear array de cuadrados
+const nums = [1, 2, 3, 4, 5];
+const cuadrados = nums.map(num => num * num);
+console.log(cuadrados);
+
+//convertir a string
+const edades = [25, 30, 35];
+const mensajeEdades = edades.map(edad => `tengo ${edad} años`);
+console.log(mensajeEdades);
+
+//filter
+//const numeros = [1, 2, 3, 4, 5];
+const pares = numeros.filter(numero => numero % 2 === 0);
+console.log(pares);
+
+const palabras = ["hola", "holiiiiiis", "holu", "holaaaaaaa"];
+const palabrasLargas = palabras.filter(palabra => palabra.length > 4);
+console.log(palabrasLargas);
+
+//filtrar por propiedad
+const empleados = [
+    { nombre: "mirtha", edad: 98},
+    { nombre: "susana", edad: 36},
+    { nombre: "moria", edad: 17}
+];
+const mayores = empleados.filter(empleado => empleado.edad >= 18)
+console.log(mayores);
+console.table(mayores);
+
+//filtrar multiples condiciones
+const pedidos =[
+    { id: 1, producto: "laptop", cantidad: 1, completada: false},
+    { id: 2, producto: "mouse", cantidad: 3, completada: false},
+    { id: 3, producto: "teclado", cantidad: 2, completada: true},
+    { id: 4, producto: "tarjeta grafica", cantidad: 1, completada: false},
+    { id: 5, producto: "monitor", cantidad: 2, completada: true}
+]
+
+const ordenesCompletadas = pedidos.filter(p => pedidos.cantidad > 1 && p.completada);
+console.log(ordenesCompletadas);
+
+//reduce
+//reduce el array a un unico valor y retorna un valor acumulado
+
+//sumar propiedades
+const decenas = [10, 20, 30, 40, 50];
+const sumaDecenas = decenas.reduce((sum, numero) => sum += numero, 0);
+console.log(sumaDecenas);
+
+
+//sumar ventas
+const ventas = [
+    {producto: "ojotas", cantidad: 3, precio: 25},
+    {producto: "pantalones", cantidad: 2, precio: 40},
+    {producto: "campera", cantidad: 1, precio: 80}
+]
+const totalVentas = ventas.reduce((suma, prod) => suma + (prod.precio * prod.cantidad), 0);
+// el 0 es el valor inicial de la variable SUMA que es el acumulador donde se guarda la suma
+console.log(totalVentas);
+
+//find y findIndex
+//buscan el primero elemento q cumpla la condicion y retorna el elemento o indice
+
+//buscando numero|
+const listaNumeros = [5, 12, 8, 130, 44]
+const numeroEncontrado = listaNumeros.find(num => num > 10);
+console.log(numeroEncontrado); // trae el 10 ya q es el primero q se encontro cumpliendo a condicion
+
+//encontrar indice de un objeto
+const tareas = [
+    { id: 1, descripcion: 'Comprar leche', completada: false },
+    { id: 2, descripcion: 'Estudiar JavaScript', completada: true },
+    { id: 3, descripcion: 'Hacer ejercicio', completada: false }
+];
+
+const indiceTarea = tareas.findIndex(tarea => tarea.completada);
+console.log(indiceTarea);
+
+
+// for...of
+// Tiene una sintaxis limpia, permite break/continue pero no provee índice automático
+const nuevosEmpleados = [
+    { nombre: 'Ana', salario: 3000 },
+    { nombre: 'Juan', salario: 3500 },
+    { nombre: 'María', salario: 4000 }
+];
+
+for (const empleado of nuevosEmpleados) {
+    if (empleado.salario > 3500) {
+        console.log(`${empleado.nombre} gana mas de 3500`);
+        break;
+    }
+}
+
+///////////////////
+// some y every //
+// Verificar si alguno o todos cumplen una condicion
+const numerosRandom = [1, 3, 5, 7, 8];
+const hayPares = numerosRandom.some(num => num % 2 === 0);
+console.log(hayPares); // true
+
+const todosPositivos = numerosRandom.every(num => num > 0);
+console.log(todosPositivos); // true
+
+
+// Verificamos si hay usuarios admin en nuevosEmpleados
+const hayAdmins = nuevosEmpleados.some(emp => emp.rol === "admin");
+console.log(hayAdmins);
+
+
+// Verificamos si todos los nuevosEmpleados cobran 3500 o superior
+const todosSonSrCobranza = nuevosEmpleados.every(emp => emp.salario >= 3500);
+console.log(todosSonSrCobranza);
+
+
+
+/* =========================
+    Iteracion de objetos
+============================
+
+- Podemos acceder a propiedades y modificar valores
+- for...in
+- Object.keys(), Object.values(), Object.entries()
+*/
+
+const estudiante = { nombre: "Catriel", edad: 45, curso: "Progra III" };
+
+// Iteramos con for...in
+for (const propiedad in estudiante) {
+    console.log(`${propiedad}: ${estudiante[propiedad]}`); // nombre: Catriel   edad: 45   curso: Progra III
+}
+
+
+// Object.keys() para obtener claves
+const claves = Object.keys(estudiante);
+claves.forEach(clave => console.log(clave));
+
+
+// Object.values() para obtener valores
+const valores = Object.values(estudiante);
+console.log(valores);
+
+
+// Object.entries() para obtener pares clave-valor
+for (const [clave, valor] of Object.entries(estudiante)) {
+    console.log(`${clave} : ${valor}`);
+}
+
+
+/*========================
+    Resumen comparativo
+==========================
+
+1. Bucles clásicos ( for , while ) son los más rápidos para iteraciones simples
+2. Métodos funcionales ( map , filter ) son más lentos pero más expresivos
+3. for...of ofrece buen equilibrio entre rendimiento y legibilidad
+
+
+Recomendaciones de uso
+
+- Transformar array:            map()
+- Filtrar elementos:            filter()
+- Reducir a un valor:           reduce()
+- Buscar elemento:              find() y findIndex()
+- Verificar condiciones:        some() y every()
+- Necesitamos break/continue:   for...of, for()
+*/
+
