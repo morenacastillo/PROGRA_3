@@ -1,0 +1,16 @@
+h1{
+    color: red
+}
+
+#miContenedor, p{
+    border: 2px solid;
+}
+
+p{
+    width: 150px;
+    text-align: center;
+}
+
+#padre {
+    border: 2px solid green;
+}
