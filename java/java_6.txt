@@ -73,6 +73,7 @@ console.log(titulo.textContent); // Titulo principal
 
 
 // querySelector() querySelectorAll()
+
 // querySelector: selecciona el PRIMER elemento que coincida con un selector CSS (etiqueta, .clase, #id)
 // querySelectorAll: selecciona TODOS los elementos que coincidan con el selector CSS y devuelve una NodeList (similar a un array)
 

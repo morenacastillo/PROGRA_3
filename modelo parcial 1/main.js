@@ -15,30 +15,32 @@ const librosTienda = [
 
 
 
-/*
-const boton = document.getElementById("boton");
+/*---------------------
+VARIABLES DEL DOM
+-----------------------*/
+let carrito = [];
+let htmlCarrito = "";
 
-console.log(librosTienda[2]);
-console.log(librosTienda[3].precio);
-
-
- boton.addEventListener("click", mostrarLista);
- let htmlProductos = "<ul>";
-librosTienda.forEach(libro => {
-        // console.log(libro.nombre);
-
-    htmlProductos += `<li>${libro.nombre} /  ${libro.precio}u$s</li>`;
-});
-htmlProductos += "</ul>";
-console.log(htmlProductos);
-*/
-
-//barra busqueda
-const barraBusqueda = document.getElementById("barra-busqueda")
+/*---------------------
+VARIABLES DEL DOM
+-----------------------*/
+const barraBusqueda = document.getElementById("barra-busqueda");
 
 const contenedorProductos = document.getElementById("contenedor-productos");
 
-barraBusqueda.addEventListener("keyup", filtrarProducto)
+const contenedorCarrito = document.getElementById("contenedor-carrito");
+
+const botonVaciarCarrito = document.getElementById("vaciar-carrito");
+
+/*---------------------
+ESCUCHADORES DE EVENTOS
+-----------------------*/
+/*input se puede utilizar si nos interesa que se detecte un cambio
+de pegar texto con el mouse sin utilizar el teclado
+*/
+barraBusqueda.addEventListener("input", filtrarProducto)
+
+
 
 function mostrarLista(array){
 
@@ -49,21 +51,92 @@ function mostrarLista(array){
             <img src="${libro.ruta_img}" alt="${libro.nombre}">
             <h3>${libro.nombre}</h3>
             <p>${libro.precio}$</p>
-            <button>Agregar al carrito</button>
+            <button onclick="agregarACarrito(${libro.id})">Agregar al carrito</button>
         </div>
         `
     })
     contenedorProductos.innerHTML = htmlProductos;
 }
 
-function filtrarProducto(){
-    let valorBusqueda
+function filtrarProducto()
+{
+    let valorBusqueda = barraBusqueda.value.toLowerCase();
+    /* Las arrows functions de una sola línea no llevan llaves y el return está implícito*/
+    // let productosFiltrados = librosTienda.filter(libro => libro.nombre.toLowerCase().includes(valorBusqueda))
+    // let productosFiltrados = librosTienda.filter(libro => {
+    //     return libro.nombre.toLowerCase().includes(valorBusqueda)
+
+    let productosFiltrados = librosTienda.filter(libro => {
+        return libro.nombre.toLowerCase().includes(valorBusqueda)
+    })
+
+    /* Lógica para en vez de filtrar los libros, cambiar el orden 
+
+    / let productosNoIncluidos = librosTienda.filter(libro => {
+    /     return !libro.nombre.toLowerCase().includes(valorBusqueda)
+    / })
+    / productosNoIncluidos.forEach(element => {
+    /     productosFiltrados.push(element)
+      
+    / });
+    */
+
+
+    mostrarLista(productosFiltrados);
+    console.log(barraBusqueda) 
+    console.log(valorBusqueda) 
+    console.log(productosFiltrados) 
+}
+
+function agregarACarrito(idLibro){
+
+    // alert(`Este libro tiene el id ${idLibro}`)
+    carrito.push(librosTienda.find(libro => libro.id == idLibro));
+    mostrarCarrito();
+    
+    console.log(htmlCarrito)
+}
+
+function mostrarCarrito(){
+    
+    htmlCarrito = "<ul>";
+       carrito.forEach(libro => {
+        htmlCarrito += 
+        `
+        <li class="bloque-item">
+        <p class="nombre-item">${libro.nombre} - ${libro.precio}</p>
+        <button class="boton-eliminar">Eliminar</button>
+        </li>   
+        `;
+    })
+    htmlCarrito += 
+    `
+        </ul>
+        <div> 
+            <button id="vaciar-carrito" onclick="vaciarCarrito()">Vaciar carrito</button>
+        </div>
+    `;
+
+    contenedorCarrito.innerHTML = htmlCarrito;
+}
+
+function eliminarDelCarrito(){
+
+}
+
+function vaciarCarrito(){
+    carrito = [];
+    mostrarCarrito();
 }
 
 
-function init(){
+function init (){
     mostrarLista(librosTienda);
-
+    mostrarCarrito();
 }
 
 init()
+
+/*CONSIGNA
+- pensar como eliminar elementos del carrito de manera individual,
+considerando que puede haber muchos productos con el mismo ID en el carrito */
