@@ -114,7 +114,7 @@ sumar(5,6); // argumentos
 */
 
 let padre = document.getElementById("padre")
-let hijo = document.getElementById("hjo")
+let hijo = document.getElementById("hijo")
 
 // escuchar el click en el div padre
 padre.addEventListener("click", function() {
@@ -136,3 +136,119 @@ formulario.addEventListener("submit", function(event) {
     event.preventDefault();
     console.log("Formulario no enviado");
 });
+
+
+
+// almacenamiento persistente
+/*
+es la manera en que las aplicaciones pueden recordar informacion del usuario entre sesiones o durante la navegación
+
+el navegador proporciona mecanismo para almacenar datos del lado del cliente
+- cookies
+- local storage
+- sesion storage
+
+
+====== cookies =======
+son pequeños fragmentos de info que se lmacenan en e navegador del usuario y q se envian con cada peticion http al servidor. son mas antiguas q local y session storage y fueron usadas para mantener la sesion del usuario, guardar preferencias, etc
+
+caracteristicas:
+-persistencia: las cookies pueden ter una fecha de expiracion. si no se establece una, la cookie sera eliminada al cerrar la sesion del navegador
+- envio al servidor: se envian automaticamente al servidor con cada solicitud http, lo que puede ser util pero sobrecarga la red
+- almacenamiento por orige (dominio y protocolo): al igual que local y sesion storage, las cookies estan asociadas a un dominio en especcifico
+
+uso principal:
+-autenticacion (tokens, sesion)
+- preferencias del usuario que deben ser eviadas al servidor
+-seguimiento (traking) de la actividad web
+
+caract - tecnicas:
+se envian automaticamente al servidor con cada solicitud http
+-tamaño maximo de 4gb
+-expioran segun una fecha determinada o duracion
+-se puede marcar como httponly (accesibles solo desde el servidor) y secure (solo sobre http)
+
+
+*/
+
+document.cookie= "usuario=Pity; expires=Fri, 31 Dec 2025 23:59:29 YC; path/";
+console.log(document.cookie);
+
+
+// ====== local storage ======
+/*
+es una api q permite almacenar datos de manera persistente en el navegador
+
+los datos almacenados en localstorage no tienen fecha de expiracion, por lo q estaran disponibles incluso despues de cerrar y reabrir el navegador
+
+uso principal:
+- guardar datos que deben persistir incluso despues de cerrar el navegador
+- almacenar configuraciones de usuario, temas, carrito de compras, etc
+
+caract - tecnicas:
+- tamaño maximo 5 - 10 MB por dominio
+- persistente, no tiene expiracion
+- accesible solo desde js
+
+metodos de localstorage:
+- guarda un par clave-valor:                    setItem(clave, valor):
+- obtiene el valor asociado a la clave:         getItem(clave)
+- elimina el par clave-valor:                   removeItem(clave) 
+- elimina todos los datos almacenados:          localStorage.clear() 
+- obtiene la clave en la posicion especificada: key(indice) 
+*/
+
+localStorage.setItem("tema", "oscuro");
+localStorage.setItem("idioma", "es");
+// creamos uin objeto
+let nombrePrueba = {
+    nombre: "Morena",  
+    ocupacion: "estudiante",
+    formacion: "UTN",
+    barrio: "avellaneda"
+}
+
+localStorage.setItem("nombre", "morena");
+console.log(localStorage.getItem("nombre")); 
+
+
+console.log(nombrePrueba);
+
+//seteamos nuestro objeto como texto plano json
+let jsonNombrePrueba = JSON.stringify(nombrePrueba);
+console.log(jsonNombrePrueba);
+localStorage.setItem("prueba", jsonNombrePrueba);
+
+//recuperamos del localstorage nuestro texto plano almaenado y lo convertimos en un objeto
+let recuperarPrueba = JSON.parse(jsonNombrePrueba)
+console.log(recuperarPrueba);
+
+
+// utilizar local storage cuando por ej guardar un carrito de compras, sdonde el usuario selecciona productos y abandona la tienda, al volver a la tienda, el carrito sigue ahi
+
+
+
+// ====== session storage ======
+/*
+es una api similar a local pero que los datos almacenados solo se mantien durante la sesion del navegador, una vez q se cierra la pestaña o el navegador, los datos se eliminan automaticamente
+
+uso principal: 
+- guardar datos temporales mientras la pestaña del navegador esta abierta
+- guardar informacion de formularios o pasos de navegacion de una misma sesion
+
+caract - tecnicas:
+- tamaño simiar a local storage (5-10 MB por dominio)
+- datos eliminados al cerrar la pestaña o el navegador
+- accesible solo desde js
+
+metodos de session storage:
+- guarda un par clave-valor:                    setItem(clave, valor):
+- obtiene el valor asociado a la clave:         getItem(clave)
+- elimina el par clave-valor:                   removeItem(clave) 
+- elimina todos los datos almacenados:          sessionStorage.clear() 
+- obtiene la clave en la posicion especificada: key(indice)
+
+consideraciones adicionales
+- seguridad: no almacenar informacion sensible en local o session storage
+- En este caso, usemos cookies seguras con HttpOnly y Secure
+*/
