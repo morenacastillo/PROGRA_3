@@ -1,16 +1,49 @@
+//1) pensamos donde usariamos la propiedad cantidad (agregar, eliminar -> AUMENTAR / DECREMENTO)
+//2) cuando hablamos de cnatidad se involucran LIMITES (que pasa si llego a cantidad 0, existe cantidad -1 o deberia automaticamente hacer un eliminar?)
+
 const librosTienda = [
-    {id:1, nombre:"alicia en el pais de las maravillas", precio: 150, ruta_img: "https://imgs.search.brave.com/ZLVczFBH1yNSnL-_yP5zkCu7wRDtDS-Z3VmAT7p24tg/rs:fit:860:0:0:0/g:ce/aHR0cHM6Ly9odHRw/Mi5tbHN0YXRpYy5j/b20vRF9RX05QXzJY/XzY1NDQzNi1NTEE3/NTIyNDE1NzQzNV8w/MzIwMjQtVi53ZWJw"
-     },
-    {id:2, nombre:"moby dick", precio: 350, ruta_img: "https://imgs.search.brave.com/jIEQw2oGsnfX_iiImOSAa9EYhueuR7vbQw4HCw_CMXQ/rs:fit:860:0:0:0/g:ce/aHR0cHM6Ly9odHRw/Mi5tbHN0YXRpYy5j/b20vRF9RX05QXzJY/Xzk1NjI1MC1NTEE1/MzYxMzcxMjgyNV8w/MjIwMjMtVi53ZWJw"
-     },
-     {id:3, nombre:"caperucita roja", precio: 250, ruta_img: "https://imgs.search.brave.com/VOkLNKd2xCuor5CVDISOTaUNyFT6U1iJSVR0Agc-a-I/rs:fit:860:0:0:0/g:ce/aHR0cHM6Ly9odHRw/Mi5tbHN0YXRpYy5j/b20vRF9RX05QXzJY/Xzc0NDcyOC1NTFU3/ODk3MTU2Nzc4OF8w/OTIwMjQtVi53ZWJw"
-     },
-     {id:4, nombre:"las viudas de los jueves", precio: 50, ruta_img: "https://imgs.search.brave.com/O_4jd4_XejpgDG9R2mQ-9mSFD_PNIXovVaMtH3ESJ98/rs:fit:860:0:0:0/g:ce/aHR0cHM6Ly9pbWFn/ZXMtbmEuc3NsLWlt/YWdlcy1hbWF6b24u/Y29tL2ltYWdlcy9J/LzgxQnJNN1crTmZT/LmpwZw"
-     },
-     {id:5, nombre:"donde esta wally", precio: 500, ruta_img: "https://imgs.search.brave.com/2-aozIkAbZcynyV6BPZnv5JmtaqvVg64rYCbZWWzZD0/rs:fit:860:0:0:0/g:ce/aHR0cHM6Ly9odHRw/Mi5tbHN0YXRpYy5j/b20vRF9RX05QXzJY/Xzg5MTE4OC1NTFU3/MjU5MTQ4MjE2NV8x/MDIwMjMtVi53ZWJw"
-     },
-     {id:6, nombre:"el señor de los anillos", precio: 980, ruta_img: "https://imgs.search.brave.com/CPwl2Vs-nbmNobq4hCAVQZp4UpUf2A1KXr6EN6FCH64/rs:fit:860:0:0:0/g:ce/aHR0cHM6Ly9odHRw/Mi5tbHN0YXRpYy5j/b20vRF9RX05QXzJY/XzY4ODE4OC1NTE01/MjM1MTMzMjM1OF8x/MTIwMjItVi53ZWJw"
-     } 
+    {
+        id:10000, 
+        nombre:"alicia en el pais de las maravillas", 
+        precio: 150, 
+        ruta_img: "https://imgs.search.brave.com/ZLVczFBH1yNSnL-_yP5zkCu7wRDtDS-Z3VmAT7p24tg/rs:fit:860:0:0:0/g:ce/aHR0cHM6Ly9odHRw/Mi5tbHN0YXRpYy5j/b20vRF9RX05QXzJY/XzY1NDQzNi1NTEE3/NTIyNDE1NzQzNV8w/MzIwMjQtVi53ZWJw",
+        cantidad: 0
+    },
+    {
+        nombre:"moby dick",
+        precio: 350, 
+        ruta_img: "https://imgs.search.brave.com/jIEQw2oGsnfX_iiImOSAa9EYhueuR7vbQw4HCw_CMXQ/rs:fit:860:0:0:0/g:ce/aHR0cHM6Ly9odHRw/Mi5tbHN0YXRpYy5j/b20vRF9RX05QXzJY/Xzk1NjI1MC1NTEE1/MzYxMzcxMjgyNV8w/MjIwMjMtVi53ZWJw", 
+        id: 2,
+        cantidad: 0
+    },
+    {
+        id:32, 
+        nombre:"caperucita roja", 
+        precio: 250, 
+        ruta_img: "https://imgs.search.brave.com/VOkLNKd2xCuor5CVDISOTaUNyFT6U1iJSVR0Agc-a-I/rs:fit:860:0:0:0/g:ce/aHR0cHM6Ly9odHRw/Mi5tbHN0YXRpYy5j/b20vRF9RX05QXzJY/Xzc0NDcyOC1NTFU3/ODk3MTU2Nzc4OF8w/OTIwMjQtVi53ZWJw",
+        cantidad: 0
+    },
+    {
+        id:40, 
+        nombre:"las viudas de los jueves", 
+        precio: 50, 
+        ruta_img: "https://imgs.search.brave.com/O_4jd4_XejpgDG9R2mQ-9mSFD_PNIXovVaMtH3ESJ98/rs:fit:860:0:0:0/g:ce/aHR0cHM6Ly9pbWFn/ZXMtbmEuc3NsLWlt/YWdlcy1hbWF6b24u/Y29tL2ltYWdlcy9J/LzgxQnJNN1crTmZT/LmpwZw",
+        cantidad: 0
+    },
+    {
+        id:5, 
+        nombre:"donde esta wally", 
+        precio: 500, 
+        ruta_img: "https://imgs.search.brave.com/2-aozIkAbZcynyV6BPZnv5JmtaqvVg64rYCbZWWzZD0/rs:fit:860:0:0:0/g:ce/aHR0cHM6Ly9odHRw/Mi5tbHN0YXRpYy5j/b20vRF9RX05QXzJY/Xzg5MTE4OC1NTFU3/MjU5MTQ4MjE2NV8x/MDIwMjMtVi53ZWJw",
+        cantidad: 0
+    },
+    {
+        id: 6, 
+        nombre:"el señor de los anillos", 
+        precio: 980, 
+        ruta_img: "https://imgs.search.brave.com/CPwl2Vs-nbmNobq4hCAVQZp4UpUf2A1KXr6EN6FCH64/rs:fit:860:0:0:0/g:ce/aHR0cHM6Ly9odHRw/Mi5tbHN0YXRpYy5j/b20vRF9RX05QXzJY/XzY4ODE4OC1NTE01/MjM1MTMzMjM1OF8x/MTIwMjItVi53ZWJw",
+        cantidad: 0
+    }
 ];
 
 
@@ -41,9 +74,8 @@ de pegar texto con el mouse sin utilizar el teclado
 barraBusqueda.addEventListener("input", filtrarProducto)
 
 
-
-function mostrarLista(array){
-
+function mostrarLista(array)
+{
     let htmlProductos = "";
     array.forEach(libro=>{ 
         htmlProductos += `
@@ -57,6 +89,8 @@ function mostrarLista(array){
     })
     contenedorProductos.innerHTML = htmlProductos;
 }
+
+
 
 function filtrarProducto()
 {
@@ -90,22 +124,26 @@ function filtrarProducto()
 
 function agregarACarrito(idLibro){
 
+    console.log("Agregado al carrito: " + idLibro);
     // alert(`Este libro tiene el id ${idLibro}`)
     carrito.push(librosTienda.find(libro => libro.id == idLibro));
     mostrarCarrito();
-    
-    console.log(htmlCarrito)
+
+    //guardar estos cambios en LS
+    actualizarCarrito();
 }
+
 
 function mostrarCarrito(){
     
     htmlCarrito = "<ul>";
-       carrito.forEach(libro => {
+       carrito.forEach( (libro, index) => {
         htmlCarrito += 
         `
         <li class="bloque-item">
         <p class="nombre-item">${libro.nombre} - ${libro.precio}</p>
-        <button class="boton-eliminar">Eliminar</button>
+        <button class="boton-eliminar" onclick="eliminarDelCarrito1(${index})">Eliminar por indice</button>
+        <button class="boton-eliminar" onclick="eliminarDelCarrito2(${libro.id})">Eliminar por id</button>
         </li>   
         `;
     })
@@ -117,26 +155,67 @@ function mostrarCarrito(){
         </div>
     `;
 
+    console.log("Carrito quedó:");
+    console.log(carrito);
+    console.log("-----");
     contenedorCarrito.innerHTML = htmlCarrito;
 }
 
-function eliminarDelCarrito(){
 
+
+// Eliminamos por indice
+function eliminarDelCarrito1(indiceDelObj)
+{
+    console.log("Se elimina por indice");
+    console.log(indiceDelObj);
+    carrito.splice(indiceDelObj, 1);
+    mostrarCarrito();
+
+    actualizarCarrito();
 }
+
+// Eliminamos todos los que tengan x id
+// function eliminarDelCarrito2(idDelObj)
+// {
+//     console.log("Se elimina por id");
+//     console.log(idDelObj);
+//     carrito = carrito.filter(libro => libro.id != idDelObj);
+//     mostrarCarrito();
+// }
 
 function vaciarCarrito(){
     carrito = [];
     mostrarCarrito();
 }
 
+function cargarCarrito(params) 
+{
+    console.log("Cargando carrito desde el local storage al JS");
+    let textoCarritoLeido = localStorage.getItem("carrito");
+
+    if (!textoCarritoLeido)
+    {
+        mostrarCarrito();
+    }
+    else
+    {
+        console.log("SE INTENTA PARSEAR EL CARRITO");
+        carrito = JSON.parse(textoCarritoLeido);
+        mostrarCarrito();
+    }
+}
+
+function actualizarCarrito() 
+{
+    localStorage.setItem("carrito", JSON.stringify(carrito));
+}
 
 function init (){
     mostrarLista(librosTienda);
     mostrarCarrito();
+
+    cargarCarrito();
 }
 
 init()
 
-/*CONSIGNA
-- pensar como eliminar elementos del carrito de manera individual,
-considerando que puede haber muchos productos con el mismo ID en el carrito */
