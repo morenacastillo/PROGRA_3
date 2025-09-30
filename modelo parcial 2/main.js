@@ -1,16 +1,16 @@
 const listaFrutas = [
-  {"id": 1, "nombre": "Arandano", "precio": 5000,"imagen" : "img/arandano.jpg"},
-  {"id": 2, "nombre": "Banana", "precio": 1000, "imagen": "img/banana.jpg"},
-  {"id": 3, "nombre": "Frambuesa", "precio": 4000, "imagen": "img/frambuesa.png"},
-  {"id": 4, "nombre": "Frutilla", "precio": 3000, "imagen": "img/frutilla.jpg"},
-  {"id": 5, "nombre": "Kiwi", "precio": 2000, "imagen": "img/kiwi.jpg"},
-  {"id": 6, "nombre": "Mandarina", "precio": 800, "imagen": "img/mandarina.jpg"},
-  {"id": 7, "nombre": "Manzana", "precio": 1500, "imagen": "img/manzana.jpg"},
-  {"id": 8, "nombre": "Naranja", "precio": 9000, "imagen": "img/naranja.jpg"},
-  {"id": 9, "nombre": "Pera", "precio": 2500, "imagen": "img/pera.jpg"},
-  {"id": 10, "nombre": "Anana", "precio": 3000, "imagen": "img/anana.jpg"},
-  {"id": 11, "nombre": "Pomelo amarillo", "precio": 2000, "imagen": "img/pomelo-amarillo.jpg"},
-  {"id": 12, "nombre": "Pomelo rojo", "precio": 2000, "imagen": "img/pomelo-rojo.jpg"}
+  {"id": 1, "nombre": "Arandano", "precio": 5000,"imagen" : "img/arandano.jpg", cantidad: 0},
+  {"id": 2, "nombre": "Banana", "precio": 1000, "imagen": "img/banana.jpg", cantidad: 0},
+  {"id": 3, "nombre": "Frambuesa", "precio": 4000, "imagen": "img/frambuesa.png", cantidad: 0},
+  {"id": 4, "nombre": "Frutilla", "precio": 3000, "imagen": "img/frutilla.jpg", cantidad: 0},
+  {"id": 5, "nombre": "Kiwi", "precio": 2000, "imagen": "img/kiwi.jpg", cantidad: 0},
+  {"id": 6, "nombre": "Mandarina", "precio": 800, "imagen": "img/mandarina.jpg", cantidad: 0},
+  {"id": 7, "nombre": "Manzana", "precio": 1500, "imagen": "img/manzana.jpg", cantidad: 0},
+  {"id": 8, "nombre": "Naranja", "precio": 9000, "imagen": "img/naranja.jpg", cantidad: 0},
+  {"id": 9, "nombre": "Pera", "precio": 2500, "imagen": "img/pera.jpg", cantidad: 0},
+  {"id": 10, "nombre": "Anana", "precio": 3000, "imagen": "img/anana.jpg", cantidad: 0},
+  {"id": 11, "nombre": "Pomelo amarillo", "precio": 2000, "imagen": "img/pomelo-amarillo.jpg", cantidad: 0},
+  {"id": 12, "nombre": "Pomelo rojo", "precio": 2000, "imagen": "img/pomelo-rojo.jpg", cantidad: 0}
 ]
 
 
@@ -27,6 +27,7 @@ const selectOrdenar = document.getElementById("select-ordenar");
 
 barraBusqueda.addEventListener("input", filtrarProductos);
 selectOrdenar.addEventListener("change", ordenarProductos);
+
 //===================== ORDENAR =====================
 
 function ordenarProductos(){
@@ -63,7 +64,6 @@ function filtrarProductos(){
     let productosFiltrados = listaFrutas.filter(fruta => fruta.nombre.toLowerCase().includes(textoBusqueda));
     
     mostrarLista(productosFiltrados)
-    console.log(productosFiltrados);
 }
 
 //===================== LISTA =====================
@@ -83,11 +83,16 @@ function mostrarLista(array){
 }
 
 function agregarACarrito(id){
-    console.log("agregado a carrito " + id);
-    carrito.push(listaFrutas.find(fruta => fruta.id == id));
+    const productoEnCarrito = carrito.find(fruta => fruta.id === id);
+    if(productoEnCarrito){
+        productoEnCarrito.cantidad++;
+    } else{
+        const fruta = listaFrutas.find(fruta => fruta.id === id);
+        fruta.cantidad = 1;
+        carrito.push(fruta);
+    }
     mostrarCarrito();
     actualizarCarrito();
-    
 }
 
 
@@ -97,7 +102,7 @@ function mostrarCarrito(){
     carrito.forEach( (fruta, indice) => {
         htmlCarrito += `
         <li class="bloque-item">
-        <p class="nombre-item">${fruta.nombre} - $${fruta.precio}</p>
+        <p class="nombre-item">${fruta.nombre} - $${fruta.precio}    x ${fruta.cantidad}</p>
 
         <button class="boton-eliminar" onclick="eliminarDelCarrito(${indice})">Eliminar</button>
          
@@ -107,7 +112,7 @@ function mostrarCarrito(){
                 </ul>
                 <div class="carrito-footer"> 
                     <button id="vaciar-carrito" onclick="vaciarCarrito()">Vaciar carrito</button>
-                    <p class="total-carrito">Total: $${carrito.reduce((acum, fruta) => acum + fruta.precio, 0)}</p>
+                    <p class="total-carrito">Total: $${carrito.reduce((acum, fruta) => acum + (fruta.precio * fruta.cantidad), 0)}</p>
                 </div> `;}
         else{
             htmlCarrito += `
@@ -119,8 +124,12 @@ function mostrarCarrito(){
 }
 
 function eliminarDelCarrito(indice){
-    console.log("eliminado del carrito " + indice);
-    carrito.splice(indice, 1);
+    const fruta = carrito[indice];
+    if(fruta.cantidad > 1){
+        fruta.cantidad--;
+    } else{
+        carrito.splice(indice, 1);
+    }
     mostrarCarrito();
     actualizarCarrito();
 }
