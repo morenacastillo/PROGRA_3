@@ -1,0 +1,145 @@
+header {
+    background-color: rgb(24, 155, 24);
+    margin: 0;
+    width: 100%;
+    font-family:'Trebuchet MS', 'Lucida Sans Unicode', 'Lucida Grande', 'Lucida Sans', Arial, sans-serif
+
+}
+
+body{
+    margin: 0;
+    font-family:'Trebuchet MS', 'Lucida Sans Unicode', 'Lucida Grande', 'Lucida Sans', Arial, sans-serif
+}
+
+nav {
+    width: 100%;
+    display: flex;
+    justify-content: space-between; 
+    align-items: center;
+}
+
+/*NAV*/
+.titulo-nav{
+    margin-left: 10px;
+    color: white;
+    text-align: left;
+}
+
+#barra-busqueda {
+    width: 300px;
+    margin: 20px auto; 
+    padding: 5px;
+    font-size: 16px;
+    border: none;
+    border-radius: 5px;
+}
+
+
+
+.titulo-principal{
+    text-align: center;
+}
+
+
+/* ===================== CSS CONTENEDORES DE PRODUCTOS ===================== */
+#contenedor-productos{
+    padding-top: 20px;
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    justify-content: center;
+    gap: 15px;
+}
+
+.card-producto img{
+    width: 200px;
+    height: 200px;
+    object-fit: contain;
+}
+
+.card-producto{
+    border: 1px rgb(214, 214, 214) solid;
+    border-radius: 10px;
+    padding: 5px;
+    width: 300px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: space-between;
+    
+}
+
+.boton-agregar{
+    background-color: rgb(118, 160, 118);
+    color: white;
+    border-radius: 5px;
+    border: none;
+    font-size: 20px;
+    padding: 2%;
+    cursor: pointer;
+}
+
+
+/*
+===================== CARRITO =====================
+*/
+.bloque-item{
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    font-size: 22px;
+    width: 50%;
+    margin: auto;
+}
+
+.boton-eliminar{
+    background-color: red;
+    color: white;
+    border: none;
+    border-radius: 5px;
+    padding: 8px;
+    margin-left: 10px;
+    cursor: pointer;
+    display: flex;
+    font-size: 20px;
+}
+
+.carrito-vacio{
+    text-align: center;
+    font-size: 20px;
+    margin-top: 50px;
+}
+
+
+/* ===================== BOTON VACIAR CARRITO ===================== */
+.carrito-footer{
+    display: flex;
+    justify-content: space-between;
+    margin: 20px;
+}
+
+.total-carrito{
+    font-size: 24px;
+    font-weight: bold;
+    padding-top: 15px;
+    margin: 20px;
+}
+
+#vaciar-carrito{
+    background-color: red;
+    color: white;
+    border-radius: 5px;
+    border: none;
+    font-size: 20px;
+    padding: 1.5%;
+    cursor: pointer;
+}
+
+/*/==================== SELECT ORDENAR ===================== */
+.contenedor-filtro{
+    display: flex;
+    justify-content: center;
+    font-size: 16px;
+
+    
+}

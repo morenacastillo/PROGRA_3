@@ -74,8 +74,7 @@ de pegar texto con el mouse sin utilizar el teclado
 barraBusqueda.addEventListener("input", filtrarProducto)
 
 
-function mostrarLista(array)
-{
+function mostrarLista(array){
     let htmlProductos = "";
     array.forEach(libro=>{ 
         htmlProductos += `
@@ -91,29 +90,13 @@ function mostrarLista(array)
 }
 
 
-
 function filtrarProducto()
 {
     let valorBusqueda = barraBusqueda.value.toLowerCase();
-    /* Las arrows functions de una sola línea no llevan llaves y el return está implícito*/
-    // let productosFiltrados = librosTienda.filter(libro => libro.nombre.toLowerCase().includes(valorBusqueda))
-    // let productosFiltrados = librosTienda.filter(libro => {
-    //     return libro.nombre.toLowerCase().includes(valorBusqueda)
 
     let productosFiltrados = librosTienda.filter(libro => {
         return libro.nombre.toLowerCase().includes(valorBusqueda)
     })
-
-    /* Lógica para en vez de filtrar los libros, cambiar el orden 
-
-    / let productosNoIncluidos = librosTienda.filter(libro => {
-    /     return !libro.nombre.toLowerCase().includes(valorBusqueda)
-    / })
-    / productosNoIncluidos.forEach(element => {
-    /     productosFiltrados.push(element)
-      
-    / });
-    */
 
 
     mostrarLista(productosFiltrados);
@@ -125,7 +108,6 @@ function filtrarProducto()
 function agregarACarrito(idLibro){
 
     console.log("Agregado al carrito: " + idLibro);
-    // alert(`Este libro tiene el id ${idLibro}`)
     carrito.push(librosTienda.find(libro => libro.id == idLibro));
     mostrarCarrito();
 
@@ -162,7 +144,6 @@ function mostrarCarrito(){
 }
 
 
-
 // Eliminamos por indice
 function eliminarDelCarrito1(indiceDelObj)
 {
@@ -174,21 +155,13 @@ function eliminarDelCarrito1(indiceDelObj)
     actualizarCarrito();
 }
 
-// Eliminamos todos los que tengan x id
-// function eliminarDelCarrito2(idDelObj)
-// {
-//     console.log("Se elimina por id");
-//     console.log(idDelObj);
-//     carrito = carrito.filter(libro => libro.id != idDelObj);
-//     mostrarCarrito();
-// }
 
 function vaciarCarrito(){
     carrito = [];
     mostrarCarrito();
 }
 
-function cargarCarrito(params) 
+function cargarCarrito() //leer carrito guardado previamente
 {
     console.log("Cargando carrito desde el local storage al JS");
     let textoCarritoLeido = localStorage.getItem("carrito");
@@ -204,6 +177,7 @@ function cargarCarrito(params)
         mostrarCarrito();
     }
 }
+
 
 function actualizarCarrito() 
 {

@@ -30,13 +30,14 @@ y como funciona la manipulacion del DOM
 
 // getElementById()
 // 
-
+// h1 id="titulo">Titulo principal</h1>
 let titulo = document.getElementById("titulo");
 
 console.log(titulo);
 console.log(titulo.textContent); // titulo principal
 
 // querySelector() querySelectorAll()
+
 // querySelector() selleciona el primer elemento que coincida con un selector css (etiqueta, .clase, #id)
 // querySelectorAll() selecciona todos los elementos que coincidan con el selector css y devuelve una NodeList (similar a un array)
 
@@ -48,6 +49,8 @@ console.log(primerParrafo.textContent);
 let parrafos = document.querySelectorAll(".mensaje");
 console.log(parrafos)
 
+console.log("==========================");
+
 parrafos.forEach(parrafo => console.log(parrafo.textContent));
 
 let parrafo = document.getElementById("parrafo");
@@ -57,6 +60,8 @@ parrafo.textContent = "Soy un parrafo que... meh";
 
 // modificar el contenido HTML
 parrafo.innerHTML = "<strong> Aguante la pepa <strong>";
+console.log(parrafo.textContent);
+
 
 // modificando el boton
 let boton = document.getElementById("boton");
@@ -78,6 +83,19 @@ boton.addEventListener("click", function () {
     console.log("Boton clickeado");
 });
 
+boton.onmouseover = function() {
+    boton.style.backgroundColor = "red"
+}
+boton.addEventListener("mouseover", function() {
+    console.log("mouse arriba de boton");
+});
+boton.onmouseout = function() {
+    boton.style.backgroundColor = "violet"
+}
+
+
+
+
 // escuchar el evento de pulsacion de tecla
 let input = document.getElementById("input");
 
@@ -96,6 +114,11 @@ input.addEventListener("keydown", function(event){
     console.log(`Tecla presionada: ${event.key}`)
 });
 
+input.onkeydown = function(event) {
+    console.log(`Tecla presionada PRUEBA: ${event.key}`);
+}
+
+
 // leer el valor de un campo de busqueda
 let barraBusqueda = document.getElementById("barraBusqueda")
 
@@ -104,6 +127,15 @@ barraBusqueda.addEventListener("keyup", function() {
     let valorBusqueda = barraBusqueda.value;
     console.log(valorBusqueda);
 })
+console.log("===========================");
+
+
+
+
+
+
+
+
 
 /* propagacion de eventos y event.stopPropagation */
 /*
@@ -150,10 +182,10 @@ el navegador proporciona mecanismo para almacenar datos del lado del cliente
 
 
 ====== cookies =======
-son pequeños fragmentos de info que se lmacenan en e navegador del usuario y q se envian con cada peticion http al servidor. son mas antiguas q local y session storage y fueron usadas para mantener la sesion del usuario, guardar preferencias, etc
+son pequeños fragmentos de info que se almacenan en el navegador del usuario y q se envian con cada peticion http al servidor. son mas antiguas q local y session storage y fueron usadas para mantener la sesion del usuario, guardar preferencias, etc
 
 caracteristicas:
--persistencia: las cookies pueden ter una fecha de expiracion. si no se establece una, la cookie sera eliminada al cerrar la sesion del navegador
+-persistencia: las cookies pueden tener una fecha de expiracion. si no se establece una, la cookie sera eliminada al cerrar la sesion del navegador
 - envio al servidor: se envian automaticamente al servidor con cada solicitud http, lo que puede ser util pero sobrecarga la red
 - almacenamiento por orige (dominio y protocolo): al igual que local y sesion storage, las cookies estan asociadas a un dominio en especcifico
 
@@ -200,31 +232,31 @@ metodos de localstorage:
 
 localStorage.setItem("tema", "oscuro");
 localStorage.setItem("idioma", "es");
-// creamos uin objeto
+localStorage.setItem("nombre", "morena");
+console.log(localStorage.getItem("nombre")); 
+
+
+// creamos un objeto
 let nombrePrueba = {
     nombre: "Morena",  
     ocupacion: "estudiante",
     formacion: "UTN",
     barrio: "avellaneda"
 }
-
-localStorage.setItem("nombre", "morena");
-console.log(localStorage.getItem("nombre")); 
-
-
-console.log(nombrePrueba);
-
 //seteamos nuestro objeto como texto plano json
-let jsonNombrePrueba = JSON.stringify(nombrePrueba);
+console.log("===========================");
+
+let jsonNombrePrueba = JSON.stringify(nombrePrueba); //pasar a texto plano
 console.log(jsonNombrePrueba);
+
 localStorage.setItem("prueba", jsonNombrePrueba);
 
-//recuperamos del localstorage nuestro texto plano almaenado y lo convertimos en un objeto
+//recuperamos del localstorage nuestro texto plano almaenado y lo VOLVEMOS convertimos en un objeto que era su forma original
 let recuperarPrueba = JSON.parse(jsonNombrePrueba)
 console.log(recuperarPrueba);
 
 
-// utilizar local storage cuando por ej guardar un carrito de compras, sdonde el usuario selecciona productos y abandona la tienda, al volver a la tienda, el carrito sigue ahi
+// utilizar local storage cuando por ej guardar un carrito de compras, donde el usuario selecciona productos y abandona la tienda, al volver a la tienda, el carrito sigue ahi
 
 
 

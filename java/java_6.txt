@@ -240,6 +240,7 @@ hijo.addEventListener("click", function(event) {
 });
 
 
+
 // Evitamos el envio por defecto de los formularios HTML
 let formulario = document.getElementById("formulario");
 
