@@ -25,23 +25,30 @@ const contenedorCarrito = document.getElementById("contenedor-carrito");
 
 const selectOrdenar = document.getElementById("select-ordenar");
 
+
+
+//===================== EVENTOS =====================
 barraBusqueda.addEventListener("input", filtrarProductos);
 selectOrdenar.addEventListener("change", ordenarProductos);
+
 
 //===================== ORDENAR =====================
 
 function ordenarProductos(){
     let opcionSeleccionada = selectOrdenar.value;
     let productosOrdenados = [...listaFrutas];
+
     switch(opcionSeleccionada){
         case "precioAsc":
             productosOrdenados.sort( (a, b) => a.precio - b.precio );
             mostrarLista(productosOrdenados);
             break;
+
         case "precioDesc":
             productosOrdenados.sort( (a, b) => b.precio - a.precio );
             mostrarLista(productosOrdenados);
             break
+
         case "alfAsc":
             productosOrdenados.sort((a, b) => 
                 (a.nombre.toLowerCase() > b.nombre.toLowerCase()) - 
@@ -58,6 +65,7 @@ function ordenarProductos(){
             }
 }
 
+
 //===================== BARRA BUSQUEDA =====================
 function filtrarProductos(){
     let textoBusqueda = barraBusqueda.value.toLowerCase();
@@ -65,6 +73,7 @@ function filtrarProductos(){
     
     mostrarLista(productosFiltrados)
 }
+
 
 //===================== LISTA =====================
 function mostrarLista(array){
@@ -157,10 +166,11 @@ function actualizarCarrito(){
     localStorage.setItem("carrito", JSON.stringify(carrito));
 }
 
+
+//===================== INIT =====================
 function init (){
     mostrarLista(listaFrutas);
     mostrarCarrito()
     leerCarrito();
 }
-
 init();
