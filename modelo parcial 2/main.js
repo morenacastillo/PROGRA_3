@@ -119,7 +119,7 @@ function mostrarCarrito(){
         if(carrito.length >= 1){
             htmlCarrito += `
                 </ul>
-                <div class="carrito-footer"> 
+                <div class="carrito-footer">
                     <button id="vaciar-carrito" onclick="vaciarCarrito()">Vaciar carrito</button>
                     <p class="total-carrito">Total: $${carrito.reduce((acum, fruta) => acum + (fruta.precio * fruta.cantidad), 0)}</p>
                 </div> `;}
