@@ -1,0 +1,255 @@
+/* JS 6
+
+====CALLBACKS==
+funciones que se pasan como argumentos a otras funciones para ser ejecutadas despues
+*/
+function procesarDatos (datos, callback){
+    console.log("procesando datos...");
+    const resultado = datos.toUpperCase();
+
+    callback(resultado);
+}
+
+procesarDatos("hola mundo", (res) => {
+    console.log(`resultado: ${res}`);
+    
+}); 
+
+/* un callback es una funcion q se pasa como argumento a otra funcion y se ejecuta DENTRO DE LA MISMA FUNCION despues de q algo haya ocurrido. es como decirle a una funcion:
+    - "cuando termines de hacer tu trabajo, llamas a esta otra funcion"
+
+para q se usan?
+    - permiten ejecutar codigo despues de una tarea
+    - manejo de tareas asingcronicas (lectura de archivos o solicitar datos a un servidor)
+    - hacer el codigo ma flexible y reutilizable
+*/
+
+function saludar(nombre){
+    console.log(`hola, ${nombre}`);
+}
+
+function procesarUsuario(nombre, callback){
+    callback(nombre.toUpperCase()); // llamamos al callback
+}
+
+procesarUsuario("morena", saludar);
+
+/*
+1. saludar es una funcion q saluda a alguien
+2. procesarUsuario recibe un nombre y una funcion callback
+3. cuando termina de pocesar el nombre, llama a saludar nombre 
+*/
+
+
+// ejemplo 2 CALLBACK
+console.log("inicio");
+
+// setTimeOut recibe una funcion callback q se ejecutara despues de 2 segundos
+setTimeout(() => {
+    console.log("esto se muestra despues de 2 segundos");
+    }, 2000); // es una forma de usar callbacks con funciones asincronicas
+console.log("fin");
+
+
+/* RESUMEN CALL BACK
+    - es una funcion q se pasa como argumento a otra o la misma funcion
+    - se utiliza para ejecutar codigo despues de una accion o de forma personalizada
+    - ejemplos: addEventListener, setTimeOut, funciones q reciben otras funciones
+
+
+
+*/
+
+
+
+
+/*
+==== high order functions (HOF) o funciones de alto nivel ====
+    son funciones q pueden hacer al menos una de estas dos cosas:
+        -  recibir una o mas  funciones como argumentos
+        -  devolver una funcion como resultado
+
+    En js las funciones son tratadas como "ciudadanos de primera clase" o "first class", significando que las funciones peuden ser asignadas a variables pasadas como argumentos o retornadas desde otras funciones
+
+    que nos permiten:
+        - abstraccion: permiten escribir codigo mas abstracto y reutilizable
+        - composicion:  facilitan combinar
+    */
+
+
+    //---  recibir una o mas  funciones como argumentos
+    function funcionCallBack(){
+        console.log("ejecutando funcion callback");   
+    }
+    function funcionAltoNivel(callback){
+        console.log("ejecutando la funcion de alto nivel");
+        // una vez termine de ejecutar todo el codigo, ejecuta la otra que recibio por paramentro
+        callback(); //llamada a la funcion pasada en el parametro
+    }
+    funcionAltoNivel(funcionCallBack);
+
+
+
+    //---  devolver una funcion como resultado
+    //EJEMPLO 1
+    function crearSaludo(saludo){
+        return function(nombre) {
+            console.log(`${saludo} ${nombre}`);
+            
+        }
+    }
+
+    const saludaHola = crearSaludo("Hola")
+    saludaHola("hernan")
+
+    //EJEMPLO 2
+    //saludaDespedida es una const a la q se le asigna la funcion, q al llamarla con el parametro de nombre va a retornar el log
+    const saludaDespedida = crearSaludo("adios")
+    saludaDespedida("asd")
+
+
+    // FUNCIONES DE HOF en JS
+
+    //forEach: recorre todos los elementos de un array y ejecuta una funcon sobre cada uno
+    const numeros = [1, 2, 3, 4];
+    numeros.forEach(function(num){ //funcion anonima
+        console.log(num * 2);
+        
+    });
+
+
+    //map: crea un nuevo array aplicando una fuincion a cada elemento del array original
+    const nums = [1, 2, 3];
+    const alCuadrado = nums.map(n => n ** 2);
+    console.log(alCuadrado);
+
+    /*
+    ===== craneando/desmenuzando el map =====
+
+    map es un metodo de array y tambien una funcion de alto nivel ya que recibe como argumento otra funcion. Esta funcion recibida se la llama CALLBACK y se ejecuta una vez por cada elemento en el array
+
+    en el ejemplo, el callback es: n => n * n
+    es una funcion flecha con parametro  n
+
+    esto es equivalente a escribirlo con function tambien
+        function (n){
+            return n * n
+            }
+    */
+
+    // el CALL BACK en nuestro ejemplo, es la funcion flecha, que map invoca inernamente para cada elemento del array
+
+
+    const cuadrados = numeros.map(n => n * n);
+    console.log(cuadrados);
+
+    //por dentro map hace algo parecido a:
+
+    function mapa(array, callback){
+        let nuevoArray =[];
+        for (let i = 0; array.lenght; i++){
+            nuevoArray.push(callback(array[i], i, array))
+        }
+        return nuevoArray
+    }
+
+    /*sucede que:
+    - iteracion 1 -> callback(1) -> 1 * 1 = 2
+    - iteracion 2 -> callback(1) -> 2 * 2 = 4
+    */
+
+    //filter: crea un nuevo array con los elementos que cumplen una condicion
+    const pares = nums.filter(n => n% 2 === 0);
+    console.log(pares);
+
+    //reduce: acumula los valores del array en un solo valor, segun una funcion reductora
+
+    //sort: ordena los elementos de un array segun una funcion de comparacioon
+
+    // find: devuelve el primer elemento del array que cumple una condicion
+    const frutas = ["manzana", "banana", "cereza"]
+    const frutaEncontrada = frutas.find(f => f.startsWith("b"));
+    console.log(frutaEncontrada);
+    
+
+
+
+/* ========= CALLBACK HELL =========
+*/
+
+//tipos:
+  //  - sincronicos: se ejecutan inmediantamente dentro del mismo ciclo
+    [1, 2, 3].forEach(function(n){
+        console.log(n);
+    });
+
+  //  - asincronicos: se ejecutan despues de un tiempo o de que temine una ooperación externa
+    setTimeout(() => {
+        console.log("tarea asincronica completada")
+        }, 2000);
+
+/*VENTAJAS:
+    - permiten la modularidad del codigo
+    - permite controlar el flujo en entornos asincronicos
+    - son la base de las abtracciones mas complejas como promesas y async/await
+
+
+un callback heel ocurre cuando tenemo muchas funciones anidadas dentro de otras, especialmente con tarias asincronicas (leer archivos, esperar rptas del servidor, etc)
+
+esto genera que el codigo:
+    - dificil de leer
+    - dificil de mantener
+    - facil de romper
+*/
+
+setTimeout(() =>{
+    console.log("paso 1");
+
+    setTimeout(() => {
+        console.log("paso 2");  
+
+        setTimeout(() => {
+            console.log("paso 3");
+            
+        }, 1000)
+        
+    }, 1000)
+
+}, 1000);
+
+
+/* COMO lo solucionamos:
+    - el callback hell: muchas funciones anidadas que hacen el codigo ilegible
+    - uso excesivo de callbacks en tareas asincronicas
+    - solucion: usar promises o async/await para una mejor estructura
+
+Solucion 1 usando promises
+    hacerAlgo()
+        .then(res1 => hacerAlgoMas(res1))
+        .then(res2 => continuar(res2))
+        .then(res3 => terminar(res3))
+        .then(() => console.log("Listo!"))
+        .catch(error => console.error(error));
+
+
+Solucion 2 usando async/await (mas moderno y legible)
+    async function ejecutarTareas() {
+        try {
+            const res1 = await hacerAlgo();
+            const res2 = await hacerAlgoMas(res1);
+            const res3 = await continuar(res2);
+
+            await terminar(res3);
+            console.log("Listo");
+        } catch (error) {
+            console.error(error);
+        }
+    }
+
+*/
+
+
+/*
+JS es un lenguaje orientado a eventos y asincronico. fue diseñado para ejecutarse en el navgador, donde muchas operaciones (peticiones HTTP, leer archivos, esperar clics) son asincronicas.
+No queremos que el programa se detenga esperando estas tareas, en su lugar registramos ua funcion callback que se ejecutara mas adelante, cuando la tarea termine
+*/
