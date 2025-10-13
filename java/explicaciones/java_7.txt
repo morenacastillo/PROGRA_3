@@ -3,6 +3,8 @@
 ====CALLBACKS==
 funciones que se pasan como argumentos a otras funciones para ser ejecutadas despues
 */
+
+// ejemplo 1 =============
 function procesarDatos (datos, callback){
     console.log("procesando datos...");
     const resultado = datos.toUpperCase();
@@ -24,24 +26,22 @@ para q se usan?
     - hacer el codigo ma flexible y reutilizable
 */
 
+// ejemplo 2 =============
+//1. saludar es una funcion q saluda a alguien
 function saludar(nombre){
     console.log(`hola, ${nombre}`);
 }
-
+//2. procesarUsuario recibe un nombre y una funcion callback
 function procesarUsuario(nombre, callback){
     callback(nombre.toUpperCase()); // llamamos al callback
 }
-
+//3. cuando termina de pocesar el nombre, llama a saludar nombre 
 procesarUsuario("morena", saludar);
 
-/*
-1. saludar es una funcion q saluda a alguien
-2. procesarUsuario recibe un nombre y una funcion callback
-3. cuando termina de pocesar el nombre, llama a saludar nombre 
-*/
 
 
-// ejemplo 2 CALLBACK
+
+// ejemplo 3 =============
 console.log("inicio");
 
 // setTimeOut recibe una funcion callback q se ejecutara despues de 2 segundos
@@ -56,15 +56,175 @@ console.log("fin");
     - se utiliza para ejecutar codigo despues de una accion o de forma personalizada
     - ejemplos: addEventListener, setTimeOut, funciones q reciben otras funciones
 
+==========================
+caract principales de callbacks
+==========================
+1. funciones de primera clase
+    en js las funciones son ciudadanos de primera clase, lo q significa que las funciones pueden ser:
+        - asignadas a variables
+        - pasadas como argumentos
+        - retornadas desde otras funciones
+
+    EJEMPLO*/
+
+    // asignar una funcion a una variable
+    const miCallback = function () {
+        console.log("callback ejecutado");
+    }
+    // pasar como argumento
+    function ejecutarCallback(callback){
+        callback()
+    }
+    // retornar desde otra funcion
+    ejecutarCallback(miCallback);
 
 
+/*
+2. sincronia vs asincoronia
+    sincrono
+    es sincronico ya q no saldra del bucle hasta q se complete, por lo que no continua el fluijo ed la pagina. Una vez se completa, continua el flujo nromalmente
+    
+    */
+    function procesoPesado(callback){
+        console.log("iniciando proceso");
+        for (let i = 0; i < 10000; i++){
+            callback();
+        }
+    }
+
+    // procesoPesado(function(){
+    //    console.log("proceso completado");
+    //});
+    //console.log("esto se ejecuta despues del callback");
+    
+
+    //  asincrono
+    //  no frena el flujo principal de la pagina
+    function procesoAsincrono(callback) {
+        console.log("iniciando proceso asincrono..");
+        setTimeout(function(){
+            callback()
+        }, 2000);
+    }
+
+    procesoAsincrono(function(){
+        console.log("proceso asincrono completado");
+    })
+
+    console.log("esto se ejecuta inmediantamente");
+    
+
+/*
+==========================
+casos de usos comunices de callbacks
+==========================
+*/
+//  1. TEMPORIZADORES (TIMERS)
+    // setTimeOut se ejecuta una sola vez
+        setTimeout(function () {
+            console.log("esto se va a ejecutar despues de 4 seg");
+        }, 4000);
+
+    // setInterval(parecido a un setTimeOut q se repite) se ejecuta a intervalos (la funcion se repite cada x segundos)
+        let contador = 0;
+        const intervalo = setInterval(function(){
+            contador++;
+            console.log(`Contador: ${contador}`);
+            
+            if (contador === 5){
+                clearInterval(intervalo)
+            }
+        },1000);
+
+
+//  2. EVENTO DEL DOM
+    let boton = document.getElementById("miBoton")
+    boton.addEventListener("click", function(event){
+        console.log("boton clickeado", event.target);
+        
+    });
+
+
+//  3. OPERACIONES CON ARRAYS
+    // for each
+    const numeross = [1, 2, 3, 4, 5]
+    // ej 1
+        numeross.forEach(function(num, indice){
+            console.log(`indice: ${indice} - valor: ${num}`);
+            
+        });
+    // ej 2
+        numeross.forEach(function(num, index, arr){
+            arr[index] = num + 1;
+        });
+        console.log(numeross);
+        
+    
+
+    // map
+        const duplicados = numeross.map(function(num){
+            return num * 2;
+        });
+        console.log(duplicados);
+
+
+//  4. PETICIONES HTTP
+
+
+//  5. LECTURA DE ARCHIVOS (NODE.JS)
+/*
+        const fs = require("fs");
+        fs.readFile("saludos.txt", "utf-8", function(error, contenido){
+            if (error){
+                console.log("error leyendo archivo", error);
+                return
+            }
+            console.log("contenido del archivo: ", contenido);
+            
+        });
+*/
+/*
+ventajas:
+    - simpliocidad: facil de entender para operaciónes simples
+    - universalidad: compatible con todops os navegadores
+    - flexibilidad: permiten crear codigo reutilizable
+desventajas:
+    - callback hell: anidamiento excesivo que dificlta la lectura
+    - manejo de errores: complicado con callbacks anidados
+    - flujo de control: dificil de seguir con operaciónes modernas
+
+Alternativas modernas RECOMENDADAS:
+    - promesas: .then(), .catch()
+    - async / await: sintaxis mas limpia y legible
+*/
+
+
+/*
+================================
+DIFFS ENTRE HOF Y CALLSBACKS
+================================
+1. callback es una funcion que le pasamos como argumento a otra fuincion y que sera llamada en algun momento dentro de esa funcion
+es el uso concreto de pasar una funcion como parametro
+2. HOF es una funcion q cumple
+    -  recibir una o mas  funciones como argumentos (map, filter, reduce)
+    -  devolver una funcion como resultado
+
+
+callback es la funcion pasada como argumento
+HOF es la funcion q recibe o devuelve funciones
+
+un CB es usado dentro de una HOF, pero no todas las HOF usan CB explicitamente 
 */
 
 
 
 
+
+
+
+
 /*
-==== high order functions (HOF) o funciones de alto nivel ====
+======== high order functions (HOF) o funciones de alto nivel ========
     son funciones q pueden hacer al menos una de estas dos cosas:
         -  recibir una o mas  funciones como argumentos
         -  devolver una funcion como resultado
@@ -120,7 +280,7 @@ console.log("fin");
 
     //map: crea un nuevo array aplicando una fuincion a cada elemento del array original
     const nums = [1, 2, 3];
-    const alCuadrado = nums.map(n => n ** 2);
+    const alCuadrado = nums.map(n => n * n);
     console.log(alCuadrado);
 
     /*
@@ -172,10 +332,125 @@ console.log("fin");
     console.log(frutaEncontrada);
     
 
+/* ========= DESTRUCTURING =========
+es una forma de descomponer estructuras de datos como arrays y objetos en variables individuales, sin necesidad xde acceder manualmente a cada elemento o propiedad
+
+pq usarlo?
+    - mejora la legibilidad del codigo
+    - facilita el acceso rapido a datos de estructuras complejas
+    - redduce la verbosidad 
+*/
+console.log("=========DESTRUCTURING=========");
+// sin aplicarlo:
+    
+    const numerosss = [1, 2, 3]
+    let uno = numerosss[0]
+    let dos = numerosss[1]
+    console.log(uno, dos);
+    
+
+// con aplicarlo;
+    let [primero, segundo] = numerosss;
+    console.log(primero, segundo);
+    
+// asignacion a nuevas variables
+let alumno = { nombre: "morena", edad: 20 }
+let {nombre: n, edad: e} = alumno
+console.log(n, e);
+
+
+// destructuring en parametros de funcion
+function saludar ({nombre, edad}) {
+    console.log(`hola ${nombre}, tenes ${edad} años`);
+}
+saludar(alumno);
+
+
+// destructuring de arrays con vlores omitidos
+let [prim, , terc] = [10, 20, 30]
+console.log(prim, terc);
+
+
+// rest operador con destructuring
+let [a, ... resto] = [1, 2, 3, 4]
+console.log(a);
+console.log(resto);
+console.log("====================================");
+
+
+
+/* ========= SPREAD OPERATOR o OPERADOR DE PROPAGACION =========
+es una sintaxis q permite decomoponer en elementos iterables (arrya, strings y objetos) en elementos individuales
+
+su principal funcion es copiar, combinar o expandir estructuras de datos de manera eficiente
+    - manipuilacion e arrays (copiar, concatenar)
+    - combinar objetos
+
+    */
+console.log("=========SPREAD OPERATOR=========");
+
+// con copia suiperficial: no es una referencia, es decir los cambios en la copia no afectan a la original
+let original = [1, 2, 3]
+let copia = [...original]
+console.log(copia); // [1, 2, 3]
+
+// concatenar arrays (mas eficiente q concat)
+let arr1 = [1, 2]
+let arr2 = [3, 4]
+let combinador = [...arr1, ...arr2]
+console.log(combinador);
+
+// convierte strings en arrays sin usar split
+let string = "hola"
+let caracteres = [...string]
+console.log(caracteres);
+
+// combinacion de objetos
+let defaults = {tema: "oscuro", fontSize: 14}
+let configUser = {fontSize: 18};
+let configFinal = {...defaults, ...configUser} // sobreescribe el fontSize ya q es una configuracion personalizada del usuario
+console.log(configFinal);
+
+// spread operator en funciones, pasando argumentos desde un array
+function sum (a, b, c, d) { return a + b + c + d};
+let numsRandom = [1, 2, 3, 4];
+console.log(sum(...numsRandom));
+
+
+// recogemos argumentos restantes (rest parameters)
+function logArgs(first, ...rest){
+    console.log(first);
+    console.log(rest);
+}
+console.log("====================================");
+
+
+/* ========= FUNCIONES ANIDADAS =========
+son funciones definidas dentro de otras funciones, es decir una funcion interna q vive en el scope de una funcion externa. Por lo tanto la funcion anindada es una funcion que
+    - se declara dentro de otra funcion
+    - tiene acceso a todas las variables y parametro de u funcion externa
+    - puede ser utilizada para orgnaizar mejor el codigo, modularizar logica o crear closures
+*/
+
+console.log("=========FUNCIONES ANIDADAS=========");
+
+function saludar (nombre){
+    function construirMensaje (){
+        return `hola ${nombre}`;
+    }
+    return construirMensaje()
+}
+console.log(saludar("asd"))
+
+
+
+
+console.log("====================================");
+
 
 
 /* ========= CALLBACK HELL =========
-*/
+
 
 //tipos:
   //  - sincronicos: se ejecutan inmediantamente dentro del mismo ciclo
@@ -184,9 +459,9 @@ console.log("fin");
     });
 
   //  - asincronicos: se ejecutan despues de un tiempo o de que temine una ooperación externa
-    setTimeout(() => {
-        console.log("tarea asincronica completada")
-        }, 2000);
+  //  setTimeout(() => {
+  //      console.log("tarea asincronica completada")
+  //      }, 2000);
 
 /*VENTAJAS:
     - permiten la modularidad del codigo
